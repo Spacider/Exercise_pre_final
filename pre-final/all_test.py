@@ -4,22 +4,31 @@ __author__ = 'Gary'
 
 from itertools import combinations
 
-def subnumbers_whose_digits_add_up_to(number, sum_of_digits):
-    result = set()
-    list_a = list(map(int, str(number)))
+def number_of_words_in_dictionary(word_1, word_2):
+    with open('dictionary.txt') as file:
+        all_file = file.readlines()
 
-    lens = 1
-    while lens <= len(list_a):
-        for item in list(combinations(list_a, lens)):
-            print(item)
-            if sum(item) == sum_of_digits:
-                result.add(int("".join(map(str, item))))
-        lens += 1
+    all_file = [_.strip() for _ in all_file]
+    if word_1 not in all_file and word_2 not in all_file:
+        if word_1 == word_2:
+            print(f'Could not find {word_1} in dictionary.')
+        else:
+            print(f'Could not find at least one of {word_1} and {word_2} in dictionary.')
+    else:
+        if word_1 not in all_file:
+            print(f'{word_2} is in dictionary.')
+        elif word_2 not in all_file:
+            print(f'{word_1} is in dictionary.')
+        else:
+            word_1_index = all_file.index(word_1)
+            word_2_index = all_file.index(word_2)
+            print(f'Found {abs(word_2_index - word_1_index) + 1} words between {word_1} and {word_2} in dictionary')
 
-    return [_ for _ in result]
+
+
 
 
 if __name__ == '__main__':
-    print(subnumbers_whose_digits_add_up_to(123, 6))
+    number_of_words_in_dictionary('COMPANY', 'comparison')
 
 
