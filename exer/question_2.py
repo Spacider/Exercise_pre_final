@@ -28,6 +28,14 @@ def f(n):
     8 bits are set to 1 in the binary representation of 9871.
     '''
     # Insert your code here
+    switch_to_binary = bin(n)
+    binary = switch_to_binary.split('b')[1]
+    print(f'{n} in binary reads as: {binary}.')
+    count_1 = binary.count('1')
+    if count_1 == 1:
+        print(f'Only one bit is set to 1 in the binary representation of {n}.')
+    else:
+        print(f'{count_1} bits are set to 1 in the binary representation of {n}.')
 
 
 if __name__ == '__main__':
