@@ -43,6 +43,21 @@ def f(n):
     '''
     factors = {}
     # Insert your code here
+    k = 2
+    number = n
+    count = 0
+    while number != 1:
+        if number % k == 0:
+            count += 1
+            number = number // k
+        else:
+            k += 1
+            count = 0
+        if count > 0:
+            factors[k] = count
+
+
+
     print(f'The decomposition of {n} into prime factors reads:')
     print('  ', n, '=', end = ' ')
     print(' x '.join(factors[x] == 1 and str(x) or f'{x}^{factors[x]}'for x in sorted(factors)))
