@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*-
 __author__ = 'Gary'
 
+from itertools import combinations
+
 def subnumbers_whose_digits_add_up_to(number, sum_of_digits): 
     '''
     You can assume that "number" consists of digits not equal to 0 and that "sum_of_digits" is an integer.
@@ -23,7 +25,15 @@ def subnumbers_whose_digits_add_up_to(number, sum_of_digits):
     >>> subnumbers_whose_digits_add_up_to(121212, 5)
     [122, 212, 221, 1112, 1121, 1211]
     >>> subnumbers_whose_digits_add_up_to(123454321, 10)
-    [145, 154, 235, 244, 253, 343, 352, 442, 451, 532, 541, 1234, 1243, \
-    1252, 1342, 1351, 1432, 1441, 1531, 2332, 2341, 2431, 2521, 3421, \
-    4321, 12331, 12421, 13321]
+    [145, 154, 235, 244, 253, 343, 352, 442, 451, 532, 541, 1234, 1243, 1252, 1342, 1351, 1432, 1441, 1531, 2332, 2341, 2431, 2521, 3421, 4321, 12331, 12421, 13321]
     '''
+    result = set()
+    list_a = list(map(int, str(number)))
+
+    lens = 1
+    while lens <= len(list_a):
+        for item in list(combinations(list_a, lens)):
+            if sum(item) == sum_of_digits:
+                result.add(int("".join(map(str, item))))
+        lens += 1
+    return sorted([_ for _ in result])
