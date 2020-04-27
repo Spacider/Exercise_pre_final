@@ -4,7 +4,7 @@ You might find the reader() function of the csv module useful,
 but you can also use the split() method of the str class.
 '''
 
-import csv
+import csv, math
 
 def f(year):
     '''
@@ -21,8 +21,27 @@ def f(year):
     In 2013, maximum inflation was: 0.82
     It was achieved in the following months: Feb
     '''
-    months = 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     # Insert your code here
+    with open('cpiai.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        rows = [row for row in reader]
+
+    max_data = str(-math.inf)
+    month = []
+    for row in rows:
+        if row[0].split('-')[0] == str(year):
+            if row[2] > max_data:
+                month.clear()
+                month.append(months[int(row[0].split('-')[1]) - 1])
+                max_data = row[2]
+            elif row[2] == max_data:
+                month.append(months[int(row[0].split('-')[1]) - 1])
+
+    print(f'In {year}, maximum inflation was: {max_data}')
+    print(f'It was achieved in the following months: {", ".join(_ for _ in month)}')
+
+
 
 
 if __name__ == '__main__':
