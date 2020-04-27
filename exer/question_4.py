@@ -5,7 +5,7 @@ Will be tested with a at equal equal to 2 and b at most equal to 10_000_000.
 
 import sys
 from math import sqrt
-
+from itertools import count
 
 def f(a, b):
     '''
@@ -28,6 +28,9 @@ def f(a, b):
     '''
     number_of_primes_at_most_equal_to_b = 0
     # Insert your code here
+    for i in range(a, b + 1):
+        if is_good_prime(i):
+            number_of_primes_at_most_equal_to_b += 1
     if not number_of_primes_at_most_equal_to_b:
         print(f'There is no prime number beween {a} and {b}.')
     elif number_of_primes_at_most_equal_to_b == 1:
@@ -35,6 +38,14 @@ def f(a, b):
     else:
         print(f'There are {number_of_primes_at_most_equal_to_b} prime numbers between {a} and {b}.')
 
+def is_good_prime(number):
+    if number <= 1:
+        return False
+    for new_number in count(2):
+        if new_number * new_number > number:
+            return True
+        if number % new_number == 0:
+            return False
 
 if __name__ == '__main__':
     import doctest
