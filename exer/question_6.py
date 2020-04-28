@@ -3,8 +3,7 @@ You might find the zip() function useful, though you can also do without it.
 '''
 
 from random import randrange, seed
-
-
+from itertools import chain
 
 def display(square, size):
     print('\n'.join(' '.join(f'{x:{size}}' for x in row) for row in square))
@@ -74,8 +73,22 @@ def f(for_seed, n, upper_bound):
     print('Here is the square: ')
     display(square, len(str(upper_bound)))
     # Insert your code here
+    all_number = list(chain(*square))
+    for number in all_number:
+        if all_number.count(number) > 1:
+            duplicates.add(number)
+
+    all_number = sorted(all_number)
+    single = []
+    for number_index in range(len(all_number)):
+        if number_index % n == 0 and number_index != 0:
+            ordered_square.append(single)
+            single = []
+        single.append(all_number[number_index])
+
+
     if duplicates:
-        print('It is not a good square because it contains duplicates, namely: ', end = '')
+        print('It is not a good square because it contains duplicates, namely: ', end='')
         print(' '.join(str(e) for e in sorted(duplicates)))
     else:
         print('It is a good square.')

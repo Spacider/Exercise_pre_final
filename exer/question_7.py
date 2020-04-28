@@ -55,6 +55,20 @@ def f(height):
     123456789012345678901234567890123456789
     '''
     # Insert your code here
+    # 2n + 1个元素
+    number = 0
+    count = 0
+    # height
+    while number < height:
+        print(' ' * (height - number - 1), end='')
+        for i in range(2 * number + 1):
+            print(count, end = '')
+            count += 1
+            if count > 9:
+                count = 0
+        print()
+        number += 1
+
 
 
 if __name__ == '__main__':
