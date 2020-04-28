@@ -69,7 +69,7 @@ def f(for_seed, n, upper_bound):
     seed(for_seed)
     square = [[randrange(upper_bound) for _ in range (n)] for _ in range(n)]
     duplicates = set()
-    ordered_square = [[]]
+    ordered_square = []
     print('Here is the square: ')
     display(square, len(str(upper_bound)))
     # Insert your code here
@@ -79,12 +79,26 @@ def f(for_seed, n, upper_bound):
             duplicates.add(number)
 
     all_number = sorted(all_number)
-    single = []
-    for number_index in range(len(all_number)):
-        if number_index % n == 0 and number_index != 0:
-            ordered_square.append(single)
-            single = []
-        single.append(all_number[number_index])
+    #  Here is the square:
+    #      49  97  53
+    #       5  33  65
+    #      62  51  38
+    #     It is a good square.
+    #     Ordering the elements from left to right column, from top to bottom, yields:
+    #       5  49  62
+    #      33  51  65
+    #      38  53  97
+    # n  ： 0  1 2
+    for number_index in range(n):
+        # 0， 6, 12, 18, 24
+        # 1,  6, 12, 18
+        single = []
+        for count in range(number_index, number_index + n * n, n):
+            single.append(all_number[count])
+        ordered_square.append(single)
+
+
+
 
 
     if duplicates:
